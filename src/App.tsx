@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import Menu from "./components/Menu";
-import Header from "./components/Header";
+import {Header} from "./components/Header";
+import {NabBar} from "./components/NabBar";
+import {Profile} from "./components/Profile";
 
 function App() {
-  return (
-    <div>
-        <Header/>
-        <Menu/>
-    </div>
-  );
+    return (
+        <div className="app-wrapper">
+            <Header/>
+            <NabBar/>
+            <Profile/>
+        </div>
+    );
 }
 
 export default App;
