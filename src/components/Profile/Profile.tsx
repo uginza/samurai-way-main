@@ -1,16 +1,13 @@
 import React from "react";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export function Profile() {
     return (
         <div className={s.content}>
-            <img className={s.img} src="https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg"></img>
-            <div>Ava+description</div>
-            <div>
+           <ProfileInfo/>
                 <MyPosts/>
-            </div>
-
         </div>
     )
 }
