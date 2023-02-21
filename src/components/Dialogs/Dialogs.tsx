@@ -23,30 +23,28 @@ function Message(props:MessagePropsType){
 }
 
 export function Dialogs() {
-    const dialogData=[
+    const dialogs=[
         {id:1, name:"Valera"},
         {id:2, name:"Katya"},
         {id:3, name:"Kamilla"},
         {id:4, name:"Lucreciy"}
     ]
- const MessageData=[
+ const messages=[
         {id:1, message:"Hi"},
         {id:2, message:"Yo"},
         {id:3, message:"How are you"},
     ]
 
+   let dialogsElements=dialogs.map(d=><DialogItem name={d.name} id={d.id} />)
+    let messagesElements=messages.map(m=><Message message={m.message} id={m.id} />)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                <DialogItem name={dialogData[0].name} id={dialogData[0].id} />
-                <DialogItem name={dialogData[1].name} id={dialogData[1].id} />
-                <DialogItem name={dialogData[2].name} id={dialogData[2].id} />
-                <DialogItem name={dialogData[3].name} id={dialogData[3].id} />
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message message={MessageData[0].message} id={dialogData[0].id} />
-                <Message message={MessageData[1].message} id={dialogData[0].id} />
-                <Message message={MessageData[2].message} id={dialogData[0].id} />
+                {messagesElements}
             </div>
         </div>
     );
