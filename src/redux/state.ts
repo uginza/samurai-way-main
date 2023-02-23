@@ -49,3 +49,12 @@ export let state: RootStateType = {
         ]
     }
 }
+
+export let addPost=(postMessage:string)=>{
+    let newPost={
+        id:5,
+        value:postMessage,
+        likeCount:44
+    }
+    state.myProfilePage.myPosts.push(newPost)
+}
