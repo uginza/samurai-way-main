@@ -3,12 +3,13 @@ import s from './MyPosts.module.css';
 import {MyPost} from "./Post/MyPost";
 import {MyProfilePageType} from "../../../redux/state";
 
-type MyPostsPropsType={
-    myPosts:MyProfilePageType
-    addPost:(postMessage:string)=>void
-    newPostText:string
-    updateNewPost:(newPostText:string)=>void
+type MyPostsPropsType = {
+    myPosts: MyProfilePageType
+    addPost: () => void
+    newPostText: string
+    updateNewPost: (newPostText: string) => void
 }
+
 export function MyPostList(props: MyPostsPropsType) {
 
     let myPostsElements = props.myPosts.myPosts.map(p => <MyPost id={p.id} value={p.value} likeCount={p.likeCount}/>)
@@ -16,13 +17,11 @@ export function MyPostList(props: MyPostsPropsType) {
     let newPostEl = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        if (newPostEl.current !== null) {
-            props.addPost(newPostEl.current.value)
-        }
+        props.addPost()
     }
 
-    const onPostChange=()=>{
- if (newPostEl.current !== null) {
+    const onPostChange = () => {
+        if (newPostEl.current !== null) {
             props.updateNewPost(newPostEl.current.value)
         }
     }

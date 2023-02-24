@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../rerender";
+let rerenderEntireTree=()=>{}
 
 export type MyPostType = {
     id: number,
@@ -37,7 +37,7 @@ export let state: RootStateType = {
             {id: 1, value: "Hi.How are you", likeCount: 35},
             {id: 2, value: "Putin put out", likeCount: 335}
         ],
-        newPostText:"Hi Everybody"
+        newPostText:""
     },
     dialogsPage: {
         dialogs: [
@@ -54,18 +54,23 @@ export let state: RootStateType = {
     }
 }
 
-export let addPost=(postMessage:string)=>{
+export let addPost=()=>{
     let newPost={
         id:5,
-        value:postMessage,
+        value:state.myProfilePage.newPostText,
         likeCount:44
     }
     state.myProfilePage.myPosts.push(newPost)
-    rerenderEntireTree(state)
+    state.myProfilePage.newPostText=''
+    rerenderEntireTree()
 }
 
 export let updateNewPost=(text:string)=>{
 
     state.myProfilePage.newPostText=text
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+
+export const subscribe=(observer:() => void)=>{
+    rerenderEntireTree=observer
 }
