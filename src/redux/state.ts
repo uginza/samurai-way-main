@@ -21,31 +21,35 @@ export let store = {
             ]
         }
     },
+    _callSubscriber(state:RootStateType) {
+    },
     getState(){
         return this._state
     },
-    _callSubscriber(state:RootStateType) {
-    },
-    addPost() {
-        let newPost = {
-            id: 5,
-            value: this._state.myProfilePage.newPostText,
-            likeCount: 44
-        }
-        this._state.myProfilePage.myPosts.push(newPost)
-        this._state.myProfilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPost (text: string) {
-
-        this._state.myProfilePage.newPostText = text
-        this._callSubscriber(this._state)
-    },
     subscribe (observer: (state: RootStateType) => void){
         this._callSubscriber = observer
+    },
+    dispatch (action:ActionType) {
+if(action.type==="ADD-POST"){
+    let newPost = {
+        id: 5,
+        value: this._state.myProfilePage.newPostText,
+        likeCount: 44
+    }
+    this._state.myProfilePage.myPosts.push(newPost)
+    this._state.myProfilePage.newPostText = ''
+    this._callSubscriber(this._state)
+}else if(action.type==="UPDATE-NEW-POST-TEXT"){
+
+    this._state.myProfilePage.newPostText = action.text
+    this._callSubscriber(this._state)
+}
     }
 }
-
+export type ActionType = {
+    type: string;
+    text: string;
+}
 
 export type MyPostType = {
     id: number,
