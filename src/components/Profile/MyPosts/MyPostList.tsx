@@ -1,14 +1,20 @@
 import React, {useRef} from "react";
 import s from './MyPosts.module.css';
 import {MyPost} from "./Post/MyPost";
-import {ActionType, MyProfilePageType} from "../../../redux/state";
+import {
+    ActionType,
+    addPostActionCreater,
+    MyProfilePageType,
+    updateNewPostTextActionCreater
+} from "../../../redux/state";
 
 type MyPostsPropsType = {
     myPosts: MyProfilePageType
     newPostText: string
     dispatch:(action: ActionType)=>void
-
 }
+
+
 
 export function MyPostList(props: MyPostsPropsType) {
 
@@ -17,12 +23,12 @@ export function MyPostList(props: MyPostsPropsType) {
     let newPostEl = useRef<HTMLTextAreaElement>(null)
 
     const addPost = () => {
-        props.dispatch({type:"ADD-POST",text:""})
+        props.dispatch(addPostActionCreater())
     }
 
     const onPostChange = () => {
         if (newPostEl.current !== null) {
-            props.dispatch({type:"UPDATE-NEW-POST-TEXT", text:newPostEl.current.value})
+            props.dispatch(updateNewPostTextActionCreater(newPostEl.current.value))
         }
     }
 
