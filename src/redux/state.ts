@@ -1,7 +1,5 @@
-const ADD_POST="ADD-POST";
-const UPDATE_NEW_POST_TEXT="UPDATE-NEW-POST-TEXT";
-const ADD_MESSAGE="ADD_MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT="UPDATE-NEW-MESSAGE-TEXT"
+import {dialogsReducer} from "./dialogsReducer";
+import {profileReducer} from "./profileReducer";
 
 export type MyPostType = {
     id: number,
@@ -74,38 +72,9 @@ export let store = {
         this._callSubscriber = observer
     },
     dispatch (action:ActionType) {
-if(action.type===ADD_POST){
-    let newPost = {
-        id: 5,
-        value: this._state.myProfilePage.newPostText,
-        likeCount: 44
-    }
-    this._state.myProfilePage.myPosts.push(newPost)
-    this._state.myProfilePage.newPostText = ''
-    this._callSubscriber(this._state)
-}else if(action.type===UPDATE_NEW_POST_TEXT){
 
-    this._state.myProfilePage.newPostText = action.text
-    this._callSubscriber(this._state)
-}else if(action.type===ADD_MESSAGE){
-    let newMessage = {
-        id: 5,
-        message:this._state.dialogsPage.newMessageText
-    }
-    this._state.dialogsPage.messages.push(newMessage)
-    this._state.dialogsPage.newMessageText = ''
-    this._callSubscriber(this._state)
-}else if(action.type===UPDATE_NEW_MESSAGE_TEXT){
-
-    this._state.dialogsPage.newMessageText = action.text
-    this._callSubscriber(this._state)
-}
+        this._state.myProfilePage=profileReducer(this._state.myProfilePage,action)
+        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
+        this._callSubscriber(this._state)
     }
 }
-
-export const addMessageActionCreater=()=>({type:ADD_MESSAGE,text:""})
-export const updateNewMessageTextActionCreater=(text:string)=>({type:UPDATE_NEW_MESSAGE_TEXT, text:text})
-
-export const addPostActionCreater=()=>({type:ADD_POST,text:""})
-export const updateNewPostTextActionCreater=(text:string)=>({type:UPDATE_NEW_POST_TEXT, text:text})
-

@@ -4,10 +4,9 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {
     ActionType,
-    addMessageActionCreater,
     dialogsPageType,
-    updateNewMessageTextActionCreater,
 } from "../../redux/state";
+import {addMessageActionCreater, updateNewMessageTextActionCreater} from "../../redux/dialogsReducer";
 
 
 type DialogsPropsType={
@@ -39,7 +38,11 @@ export function Dialogs(props:DialogsPropsType) {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newMesEl}  onChange={onMessageChange}  value={props.dialogsPage.newMessageText}></textarea>
+                <textarea ref={newMesEl}
+                          onChange={onMessageChange}
+                          value={props.dialogsPage.newMessageText} placeholder={"Enter your message"}>
+
+                </textarea>
                 <button onClick={addMes}>Add</button>
             </div>
         </div>
