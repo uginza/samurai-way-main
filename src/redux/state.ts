@@ -1,62 +1,7 @@
 const ADD_POST="ADD-POST";
 const UPDATE_NEW_POST_TEXT="UPDATE-NEW-POST-TEXT";
-
-export let store = {
-    _state: {
-        myProfilePage: {
-            myPosts: [
-                {id: 1, value: "Hi.How are you", likeCount: 35},
-                {id: 2, value: "Putin put out", likeCount: 335}
-            ],
-            newPostText: ""
-        },
-        dialogsPage: {
-            dialogs: [
-                {id: 1, name: "Valera"},
-                {id: 2, name: "Katya"},
-                {id: 3, name: "Kamilla"},
-                {id: 4, name: "Lucreciy"}
-            ],
-            messages: [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "Yo"},
-                {id: 3, message: "How are you"},
-            ]
-        }
-    },
-    _callSubscriber(state:RootStateType) {
-    },
-    getState(){
-        return this._state
-    },
-    subscribe (observer: (state: RootStateType) => void){
-        this._callSubscriber = observer
-    },
-    dispatch (action:ActionType) {
-if(action.type===ADD_POST){
-    let newPost = {
-        id: 5,
-        value: this._state.myProfilePage.newPostText,
-        likeCount: 44
-    }
-    this._state.myProfilePage.myPosts.push(newPost)
-    this._state.myProfilePage.newPostText = ''
-    this._callSubscriber(this._state)
-}else if(action.type===UPDATE_NEW_POST_TEXT){
-
-    this._state.myProfilePage.newPostText = action.text
-    this._callSubscriber(this._state)
-}
-    }
-}
-
-export const addPostActionCreater=()=>({type:ADD_POST,text:""})
-export const updateNewPostTextActionCreater=(text:any)=>({type:UPDATE_NEW_POST_TEXT, text:text})
-
-export type ActionType = {
-    type: string;
-    text: string;
-}
+const ADD_MESSAGE="ADD_MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT="UPDATE-NEW-MESSAGE-TEXT"
 
 export type MyPostType = {
     id: number,
@@ -82,9 +27,85 @@ export type MyProfilePageType = {
 export type dialogsPageType = {
     dialogs: Array<DialogItemType>
     messages: Array<MessageType>
+    newMessageText:string
 }
 
 export type RootStateType = {
     myProfilePage: MyProfilePageType
     dialogsPage: dialogsPageType
+
 }
+
+export type ActionType = {
+    type: string;
+    text: string;
+}
+
+export let store = {
+    _state: {
+        myProfilePage: {
+            myPosts: [
+                {id: 1, value: "Hi.How are you", likeCount: 35},
+                {id: 2, value: "Putin put out", likeCount: 335}
+            ],
+            newPostText: ""
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: "Valera"},
+                {id: 2, name: "Katya"},
+                {id: 3, name: "Kamilla"},
+                {id: 4, name: "Lucreciy"}
+            ],
+            messages: [
+                {id: 1, message: "Hi"},
+                {id: 2, message: "Yo"},
+                {id: 3, message: "How are you"},
+            ],
+            newMessageText: ""
+        }
+    },
+    _callSubscriber(state:RootStateType) {
+    },
+    getState(){
+        return this._state
+    },
+    subscribe (observer: (state: RootStateType) => void){
+        this._callSubscriber = observer
+    },
+    dispatch (action:ActionType) {
+if(action.type===ADD_POST){
+    let newPost = {
+        id: 5,
+        value: this._state.myProfilePage.newPostText,
+        likeCount: 44
+    }
+    this._state.myProfilePage.myPosts.push(newPost)
+    this._state.myProfilePage.newPostText = ''
+    this._callSubscriber(this._state)
+}else if(action.type===UPDATE_NEW_POST_TEXT){
+
+    this._state.myProfilePage.newPostText = action.text
+    this._callSubscriber(this._state)
+}else if(action.type===ADD_MESSAGE){
+    let newMessage = {
+        id: 5,
+        message:this._state.dialogsPage.newMessageText
+    }
+    this._state.dialogsPage.messages.push(newMessage)
+    this._state.dialogsPage.newMessageText = ''
+    this._callSubscriber(this._state)
+}else if(action.type===UPDATE_NEW_MESSAGE_TEXT){
+
+    this._state.dialogsPage.newMessageText = action.text
+    this._callSubscriber(this._state)
+}
+    }
+}
+
+export const addMessageActionCreater=()=>({type:ADD_MESSAGE,text:""})
+export const updateNewMessageTextActionCreater=(text:string)=>({type:UPDATE_NEW_MESSAGE_TEXT, text:text})
+
+export const addPostActionCreater=()=>({type:ADD_POST,text:""})
+export const updateNewPostTextActionCreater=(text:string)=>({type:UPDATE_NEW_POST_TEXT, text:text})
+

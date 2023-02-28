@@ -2,11 +2,17 @@ import React, {useRef} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {dialogsPageType} from "../../redux/state";
+import {
+    ActionType,
+    addMessageActionCreater,
+    dialogsPageType,
+    updateNewMessageTextActionCreater,
+} from "../../redux/state";
 
 
 type DialogsPropsType={
     dialogsPage:dialogsPageType
+    dispatch:(action: ActionType)=>void
 }
 
 
@@ -18,8 +24,12 @@ export function Dialogs(props:DialogsPropsType) {
     let newMesEl = useRef<HTMLTextAreaElement>(null)
 
     const addMes = () => {
+       props.dispatch(addMessageActionCreater())
+    }
+
+    const onMessageChange = () => {
         if (newMesEl.current !== null) {
-            alert(newMesEl.current.value)
+            props.dispatch(updateNewMessageTextActionCreater(newMesEl.current.value))
         }
     }
     return (
@@ -29,7 +39,7 @@ export function Dialogs(props:DialogsPropsType) {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newMesEl}></textarea>
+                <textarea ref={newMesEl}  onChange={onMessageChange}  value={props.dialogsPage.newMessageText}></textarea>
                 <button onClick={addMes}>Add</button>
             </div>
         </div>

@@ -34,7 +34,7 @@ function App(props:AppPropsType) {
                     />
                     }/>
                     <Route path="/dialogs" render={() => <Dialogs
-                        dialogsPage={props.state.dialogsPage}/>}/>
+                        dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/feed" render={() => <Feed/>}/>
                     <Route path="/music" render={() => <Music/>}/>
