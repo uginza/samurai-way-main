@@ -39,6 +39,14 @@ export type ActionType = {
     text: string;
 }
 
+export type StoreType={
+    _state:RootStateType
+    _callSubscriber:(state:RootStateType)=>void
+    getState:()=>void
+    subscribe:(observer: (state: RootStateType) => void)=>void
+    dispatch:(action:ActionType)=>void
+}
+
 export let store = {
     _state: {
         myProfilePage: {

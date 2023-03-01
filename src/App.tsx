@@ -9,7 +9,7 @@ import {News} from "./components/News/News";
 import {Feed} from "./components/Feed/Feed";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionType, RootStateType} from "./redux/state";
+import {ActionType, RootStateType, StoreType} from "./redux/store";
 
 /*type AppPropsType={
     state:RootStateType
@@ -20,6 +20,7 @@ import {ActionType, RootStateType} from "./redux/state";
 type AppPropsType= {
     state:RootStateType
     dispatch: (action: ActionType) => void
+    store:StoreType
 }
 
 function App(props:AppPropsType) {
@@ -29,8 +30,7 @@ function App(props:AppPropsType) {
                 <NavBar/>
                 <div className="appWrapperContnent">
                     <Route path="/profile" render={() => <Profile
-                        profilePage={props.state.myProfilePage}
-                        dispatch={props.dispatch}
+                        store={props.store}
                     />
                     }/>
                     <Route path="/dialogs" render={() => <Dialogs
