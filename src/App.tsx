@@ -10,6 +10,7 @@ import {Feed} from "./components/Feed/Feed";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {ActionType, RootStateType, StoreType} from "./redux/store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 /*type AppPropsType={
     state:RootStateType
@@ -33,8 +34,8 @@ function App(props:AppPropsType) {
                         store={props.store}
                     />
                     }/>
-                    <Route path="/dialogs" render={() => <Dialogs
-                        dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer
+                        store={props.store}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/feed" render={() => <Feed/>}/>
                     <Route path="/music" render={() => <Music/>}/>
