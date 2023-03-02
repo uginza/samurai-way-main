@@ -18,24 +18,23 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
     updateNewPost:(newPostText:string)=>void
 }*/
 
-type AppPropsType= {
+/*type AppPropsType= {
     state:RootStateType
     dispatch: (action: ActionType) => void
     store:StoreType
-}
+}*/
 
-function App(props:AppPropsType) {
+function App(/*props:AppPropsType*/) {
     return (
             <div className="appWrapper">
                 <Header/>
                 <NavBar/>
                 <div className="appWrapperContnent">
                     <Route path="/profile" render={() => <Profile
-                        store={props.store}
                     />
                     }/>
                     <Route path="/dialogs" render={() => <DialogsContainer
-                        store={props.store}/>}/>
+                        />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/feed" render={() => <Feed/>}/>
                     <Route path="/music" render={() => <Music/>}/>
