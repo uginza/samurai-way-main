@@ -8,3 +8,5 @@ let reducers=combineReducers({
 })
 
 export let store=createStore(reducers)
+
+export type AppRootStateType= ReturnType<typeof reducers>

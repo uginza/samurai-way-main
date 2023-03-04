@@ -1,41 +1,33 @@
 import React, {ChangeEvent} from "react";
 
 import {
-    StoreType
+    ActionType,
+    RootStateType
 } from "../../redux/store";
 import {addMessageActionCreater, updateNewMessageTextActionCreater} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {connect} from "react-redux";
+import {AppRootStateType} from "../../redux/reduxStore";
 
-/*type DialogsContainerPropsType = {
-    store: StoreType
-}*/
-
-
-export function DialogsContainer(/*props: DialogsContainerPropsType*/) {
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                const addMes = () => {
-                    store.dispatch(addMessageActionCreater())
-                }
-
-                const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                    if (e.currentTarget.value !== null) {
-                        let action = updateNewMessageTextActionCreater(e.currentTarget.value)
-                        store.dispatch(action)
-                    }
-                }
-                return <Dialogs
-                    addMes={addMes}
-                    onMessageChange={onMessageChange}
-                    dialogs={store._state.dialogsPage.messages}
-                    newMessageText={store._state.dialogsPage.newMessageText}
-                    dialogsPage={store._state.dialogsPage.dialogs}
-                />
-            }
-
-            }
-        </StoreContext.Consumer>
-    );
+let mapStateToProps=(state:AppRootStateType)=>{
+return {
+    dialogsPage:state.dialogs.dialogs,
+    newMessageText:state.dialogs.newMessageText,
+    dialogs:state.dialogs.messages
 }
+}
+let mapDispatchToProps=(dispatch:(action:ActionType)=>void)=>{
+return {
+    addMes:()=>{
+        dispatch(addMessageActionCreater())
+    },
+    onMessageChange:(e: ChangeEvent<HTMLTextAreaElement>)=>{
+        if (e.currentTarget.value !== null) {
+            let action = updateNewMessageTextActionCreater(e.currentTarget.value)
+            dispatch(action)
+        }
+    }
+}
+}
+
+export const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs);
