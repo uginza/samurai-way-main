@@ -21,8 +21,8 @@ type DialogsPropsType={
 
 export function Dialogs(props:DialogsPropsType) {
 
-   let dialogsElements=props.dialogsPage.map(d=><DialogItem name={d.name} id={d.id} />)
-    let messagesElements=props.dialogs.map(m=><Message message={m.message} id={m.id} />)
+   let dialogsElements=props.dialogsPage.map(d=><DialogItem key={d.id} name={d.name} id={d.id} />)
+    let messagesElements=props.dialogs.map(m=><Message key={m.id} message={m.message} id={m.id} />)
 
     let newMesEl = useRef<HTMLTextAreaElement>(null)
 
