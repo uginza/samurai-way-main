@@ -1,8 +1,7 @@
 import React, {ChangeEvent} from "react";
 
 import {
-    ActionType,
-    RootStateType
+    ActionType
 } from "../../redux/store";
 import {addMessageActionCreater, updateNewMessageTextActionCreater} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";

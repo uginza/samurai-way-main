@@ -1,5 +1,6 @@
 import {dialogsReducer} from "./dialogsReducer";
 import {profileReducer} from "./profileReducer";
+import {UserType} from "./usersReducer";
 
 export type MyPostType = {
     id: number,
@@ -37,6 +38,8 @@ export type RootStateType = {
 export type ActionType = {
     type: string;
     text: string;
+    userId:number;
+    user:UserType
 }
 
 export type StoreType={

@@ -1,19 +1,33 @@
 import {ActionType, dialogsPageType} from "./store";
 
 const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW"
+const UNFOLLOW = "UNFOLLOW";
+const SET_USERS = "SET_USERS";
 
-let initialState= {
-    users: [
-        {id: 1,followed:true, name: "Valera",status:"I'm the boss",location:{city:"Minsk",country:"Belarus"}},
-        {id: 2,followed:false, name: "Katya",status:"I'm the boss",location:{city:"SPB",country:"Russia"}},
-        {id: 3,followed:false, name: "Kamilla",status:"I'm the boss",location:{city:"Kiev",country:"Ukraine"}},
-        {id: 4,followed:false, name: "Lucreciy",status:"I'm the boss",location:{city:"New-York",country:"USA"}}
-    ]
+
+export type UserType={
+    id: number
+    photoUrl:string
+    followed:boolean
+    name: string
+    status:string
+    location:UserLocationType
 }
 
+type UserLocationType={
+    city:string
+    country:string
+}
 
-export const usersReducer = (state: any=initialState, action: any):dialogsPageType => {
+const initialState:InitialStateType= {
+    users:[]
+};
+
+export type InitialStateType={
+    users: Array<UserType>
+}
+
+export const usersReducer = (state:InitialStateType=initialState, action: ActionType):InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return(
@@ -34,8 +48,19 @@ export const usersReducer = (state: any=initialState, action: any):dialogsPageTy
                         return u
                     })}
             )
+        case SET_USERS:
+            return(
+                {...state,users:[...state.users,action.user]}
+            )
         default:return state;
     }
 }
-export const followAC = (userId:number) => ({type:FOLLOW,userId})
-export const unfollowAC = (userId:number) => ({type: UNFOLLOW,userId})
+export const followAC = (userId:number) => (
+    {type:FOLLOW,userId} as const
+)
+export const unfollowAC = (userId:number) => (
+    {type: UNFOLLOW,userId} as const
+)
+export const setUsersAC = (users:Array<UserType>) => (
+    {type: SET_USERS,users} as const
+)
