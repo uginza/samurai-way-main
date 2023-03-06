@@ -22,7 +22,7 @@ return {
         dispatch(addMessageActionCreater())
     },
     onMessageChange:(e: ChangeEvent<HTMLTextAreaElement>)=>{
-        if (e.currentTarget.value !== null) {
+        if (e.currentTarget.value) {
             let action = updateNewMessageTextActionCreater(e.currentTarget.value)
             dispatch(action)
         }

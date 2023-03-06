@@ -18,7 +18,7 @@ let mapDispatchToProps=(dispatch:(action:ActionType)=>void)=>{
             dispatch(addPostActionCreater())
         },
         updateNewPostText:(e: ChangeEvent<HTMLTextAreaElement>)=>{
-            if (e.currentTarget.value !== null) {
+            if (e.currentTarget.value) {
                 let action = updateNewPostTextActionCreater(e.currentTarget.value)
                 dispatch(action)
             }

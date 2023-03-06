@@ -24,7 +24,6 @@ export function Dialogs(props:DialogsPropsType) {
    let dialogsElements=props.dialogsPage.map(d=><DialogItem key={d.id} name={d.name} id={d.id} />)
     let messagesElements=props.dialogs.map(m=><Message key={m.id} message={m.message} id={m.id} />)
 
-    let newMesEl = useRef<HTMLTextAreaElement>(null)
 
 
     return (
@@ -34,12 +33,12 @@ export function Dialogs(props:DialogsPropsType) {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newMesEl}
+                <textarea
                           onChange={props.onMessageChange}
                           value={props.newMessageText}
                           placeholder={"Enter your message"}>
 
-                </textarea>
+                </textarea >
                 <button onClick={props.addMes}>Add</button>
             </div>
         </div>
