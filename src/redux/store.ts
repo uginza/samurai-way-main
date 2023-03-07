@@ -38,8 +38,12 @@ export type RootStateType = {
 export type ActionType = {
     type: string;
     text: string;
-    userId:number;
-    user:UserType
+}
+
+export type UsersActionType = {
+    type: string;
+    userId:number
+    users:UserType[]
 }
 
 export type StoreType={

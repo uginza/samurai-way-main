@@ -1,14 +1,15 @@
-import s from "./Users/Users.module.css";
+import s from "./Users.module.css";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 
 
 export function Users(props: UsersPropsType) {
+
     if (props.users.length === 0) {
         props.setUsers([
             {
                 id: 1,
-                photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vokrug.tv%2Fperson%2Fshow%2Fzhenya_kanikuly%2F&psig=AOvVaw0O_MObagKwqWOtcOry69x7&ust=1678197356259000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCJjCtuC6x_0CFQAAAAAdAAAAABAD',
+                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
                 followed: true,
                 name: "Valera",
                 status: "I'm the boss",
@@ -16,7 +17,7 @@ export function Users(props: UsersPropsType) {
             },
             {
                 id: 2,
-                photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vokrug.tv%2Fperson%2Fshow%2Fzhenya_kanikuly%2F&psig=AOvVaw0O_MObagKwqWOtcOry69x7&ust=1678197356259000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCJjCtuC6x_0CFQAAAAAdAAAAABAD',
+                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
                 followed: false,
                 name: "Katya",
                 status: "I'm the boss",
@@ -24,7 +25,7 @@ export function Users(props: UsersPropsType) {
             },
             {
                 id: 3,
-                photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vokrug.tv%2Fperson%2Fshow%2Fzhenya_kanikuly%2F&psig=AOvVaw0O_MObagKwqWOtcOry69x7&ust=1678197356259000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCJjCtuC6x_0CFQAAAAAdAAAAABAD',
+                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
                 followed: false,
                 name: "Kamilla",
                 status: "I'm the boss",
@@ -32,7 +33,7 @@ export function Users(props: UsersPropsType) {
             },
             {
                 id: 4,
-                photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vokrug.tv%2Fperson%2Fshow%2Fzhenya_kanikuly%2F&psig=AOvVaw0O_MObagKwqWOtcOry69x7&ust=1678197356259000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCJjCtuC6x_0CFQAAAAAdAAAAABAD',
+                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
                 followed: false,
                 name: "Lucreciy",
                 status: "I'm the boss",
@@ -43,7 +44,9 @@ export function Users(props: UsersPropsType) {
 
     return (
         <div className={s.users}>
-            {props.users.map(u => <div key={u.id}>
+            {props.users.map((u) => {
+                return (
+                    <div key={u.id}>
                 <span>
                     <div>
                         <img src={u.photoUrl} className={s.userPhoto}/>
@@ -51,15 +54,15 @@ export function Users(props: UsersPropsType) {
                     <div>
                         {u.followed ? <button
                                 onClick={() => {
-                                    props.follow(u.id)
-                                }}>Follow</button>
+                                    props.unfollow(u.id)
+                                }}>Unfollow</button>
                             : <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}>Unfollow</button>}
+                                props.follow(u.id)
+                            }}>Follow</button>}
 
                     </div>
                 </span>
-                <span>
+                        <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
@@ -70,7 +73,9 @@ export function Users(props: UsersPropsType) {
                         <div>{u.location.country}</div>
                     </span>
                 </span>
-            </div>)}
+                    </div>
+                )
+            })}
         </div>
     )
 }

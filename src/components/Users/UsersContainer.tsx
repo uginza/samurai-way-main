@@ -6,8 +6,8 @@ import {AppRootStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
 
 
-type mapStateToProps={
-    users:InitialStateType
+type MapStateToPropsType={
+    users: Array<UserType>
 }
 
 type MapDispatchToPropsType={
@@ -16,11 +16,11 @@ type MapDispatchToPropsType={
     setUsers:(users:Array<UserType>)=>void
 }
 
-export type UsersPropsType=mapStateToProps &  MapDispatchToPropsType
+export type UsersPropsType=MapStateToPropsType &  MapDispatchToPropsType
 
-const mapStateToProps=(state: AppRootStateType):mapStateToProps=>{
+const mapStateToProps=(state: AppRootStateType):MapStateToPropsType=>{
     return{
-        users:state.usersPage.users
+        users :state.usersPage.users
     }
 }
 

@@ -1,4 +1,4 @@
-import {ActionType, dialogsPageType} from "./store";
+import {UsersActionType} from "./store";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -27,7 +27,7 @@ export type InitialStateType={
     users: Array<UserType>
 }
 
-export const usersReducer = (state:InitialStateType=initialState, action: ActionType):InitialStateType => {
+export const usersReducer = (state:InitialStateType=initialState, action: UsersActionType):InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return(
@@ -50,7 +50,7 @@ export const usersReducer = (state:InitialStateType=initialState, action: Action
             )
         case SET_USERS:
             return(
-                {...state,users:[...state.users,action.user]}
+                {...state,users:[...state.users,...action.users]}
             )
         default:return state;
     }
