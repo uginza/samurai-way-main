@@ -1,55 +1,31 @@
 import s from "./Users.module.css";
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
+import UserPhoto from "../../assets/images/image.png"
 
 
 export function Users(props: UsersPropsType) {
 
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
-                followed: true,
-                name: "Valera",
-                status: "I'm the boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
-                followed: false,
-                name: "Katya",
-                status: "I'm the boss",
-                location: {city: "SPB", country: "Russia"}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
-                followed: false,
-                name: "Kamilla",
-                status: "I'm the boss",
-                location: {city: "Kiev", country: "Ukraine"}
-            },
-            {
-                id: 4,
-                photoUrl: 'https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg',
-                followed: false,
-                name: "Lucreciy",
-                status: "I'm the boss",
-                location: {city: "New-York", country: "USA"}
-            }
-        ])
-    }
+    const getUsers=()=> {
+        if (props.users.length === 0) {
 
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
+
+
+        }
+    }
     return (
         <div className={s.users}>
+            <button onClick={getUsers}>Get Users</button>
             {props.users.map((u) => {
                 return (
                     <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photoUrl} className={s.userPhoto}/>
+                        <img src={ u.photos.small !== null ? u.photos.small : UserPhoto } className={s.userPhoto}/>
                     </div>
                     <div>
                         {u.followed ? <button
@@ -69,8 +45,8 @@ export function Users(props: UsersPropsType) {
 
                     </span>
                     <span>
-                        <div>{u.location.city}</div>
-                        <div>{u.location.country}</div>
+                        <div>{"u.location.city"}</div>
+                        <div>{"u.location.country"}</div>
                     </span>
                 </span>
                     </div>
