@@ -25,11 +25,17 @@ type UserLocationType={
 }
 
 const initialState:InitialStateType= {
-    users:[]
+    users:[],
+    pageSize:5,
+    totalUsersCount:19,
+    currentPage:1
 };
 
 export type InitialStateType={
     users: Array<UserType>
+    pageSize:number
+    totalUsersCount:number
+    currentPage:number
 }
 
 export const usersReducer = (state:InitialStateType=initialState, action: UsersActionType):InitialStateType => {

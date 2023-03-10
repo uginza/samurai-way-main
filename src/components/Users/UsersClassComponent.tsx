@@ -5,7 +5,7 @@ import axios from "axios";
 import UserPhoto from "../../assets/images/image.png"
 
 
-export class Users extends React.Component<UsersPropsType, any>{
+export class Users extends React.Component<UsersPropsType, any> {
 
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
@@ -13,23 +13,24 @@ export class Users extends React.Component<UsersPropsType, any>{
         });
     }
 
-    getUsers=()=> {
-        if (this.props.users.length === 0) {
+    render() {
+        let pageNumber = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 
-
-
-
+        let pages = [];
+        for (let i = 1; i <= pageNumber; i++) {
+            pages.push(i)
         }
-    }
 
-    render(){return(<div className={s.users}>
-            <button onClick={this.getUsers}>Get Users</button>
+        return (<div className={s.users}>
+            <div>
+                {pages.map(p=><span className={this.props.currentPage===p? s.selectedPage:''}>{p}</span>)}
+            </div>
             {this.props.users.map((u) => {
                 return (
                     <div key={u.id}>
                 <span>
                     <div>
-                        <img src={ u.photos.small !== null ? u.photos.small : UserPhoto } className={s.userPhoto}/>
+                        <img src={u.photos.small !== null ? u.photos.small : UserPhoto} className={s.userPhoto}/>
                     </div>
                     <div>
                         {u.followed ? <button
