@@ -8,22 +8,32 @@ import UserPhoto from "../../assets/images/image.png"
 export class Users extends React.Component<UsersPropsType, any> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
         });
     }
 
+    onClickHandler=(pageNumber:number)=>{
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+
+        })
+    }
+
     render() {
-        let pageNumber = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pageQuantity = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 
         let pages = [];
-        for (let i = 1; i <= pageNumber; i++) {
+        for (let i = 1; i <= pageQuantity; i++) {
             pages.push(i)
         }
 
         return (<div className={s.users}>
             <div>
-                {pages.map(p=><span className={this.props.currentPage===p? s.selectedPage:''}>{p}</span>)}
+                {pages.map(p=><span className={this.props.currentPage===p? s.selectedPage:''}
+                onClick={(e)=>{this.onClickHandler(p)}}>{p}</span>)}
             </div>
             {this.props.users.map((u) => {
                 return (

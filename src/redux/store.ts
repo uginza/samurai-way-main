@@ -44,6 +44,8 @@ export type UsersActionType = {
     type: string;
     userId:number
     users:UserType[]
+    currentPage:number
+    totalUsersCount:number
 }
 
 export type StoreType={
