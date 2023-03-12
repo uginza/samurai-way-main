@@ -46,6 +46,7 @@ export type UsersActionType = {
     users:UserType[]
     currentPage:number
     totalUsersCount:number
+    isFetching:boolean
 }
 
 export type StoreType={
