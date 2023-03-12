@@ -13,6 +13,7 @@ import {Dispatch} from "redux";
 import axios from "axios";
 import {Users} from "./Users";
 import preloader from './../../assets/images/1480.gif'
+import {Preloader} from "../common/Preloader/Preloader";
 
 type MapStateToPropsType={
     users: Array<UserType>
@@ -58,7 +59,7 @@ export class UserListAPIComponent extends React.Component<UsersPropsType, any> {
     render() {
 
         return <>
-            {this.props.isFetching?<img src={preloader}/>:null}
+            {this.props.isFetching?<Preloader/>:null}
             <Users
             totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
