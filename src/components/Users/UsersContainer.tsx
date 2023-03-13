@@ -12,7 +12,6 @@ import {AppRootStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from './../../assets/images/1480.gif'
 import {Preloader} from "../common/Preloader/Preloader";
 
 type MapStateToPropsType={
