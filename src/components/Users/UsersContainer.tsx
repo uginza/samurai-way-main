@@ -1,15 +1,15 @@
 import {connect} from "react-redux";
 import React from "react";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleisFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow,
     UserType
 } from "../../redux/usersReducer";
 import {AppRootStateType} from "../../redux/reduxStore";
-import {Dispatch} from "redux";
+import { Dispatch} from "redux";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
@@ -56,7 +56,6 @@ export class UserListAPIComponent extends React.Component<UsersPropsType, any> {
     }
 
     render() {
-
         return <>
             {this.props.isFetching?<Preloader/>:null}
             <Users
@@ -82,7 +81,7 @@ const mapStateToProps=(state: AppRootStateType):MapStateToPropsType=>{
     }
 }
 
-const mapDispatchToProps=(dispatch:Dispatch):MapDispatchToPropsType=>{
+/*const mapDispatchToProps=(dispatch:Dispatch):MapDispatchToPropsType=>{
     return{
         follow:(userId:number)=>{
             dispatch(followAC(userId))
@@ -103,6 +102,32 @@ const mapDispatchToProps=(dispatch:Dispatch):MapDispatchToPropsType=>{
             dispatch(toggleisFetchingAC(isFetching))
         }
     }
-}
+}*/
+/*const connect1 = (arg1: any, arg2: any) => innerConnect
 
-export const UsersContainer= connect (mapStateToProps,mapDispatchToProps)(UserListAPIComponent)
+const innerConnect = (component: JSX.Element) => ({some: 1})
+connect1(1, 2)(<div/>)*/
+
+export const UsersContainer= connect (mapStateToProps,
+    {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching})(UserListAPIComponent)
+
+
+/*
+const users = [{id: 1, n: 5}]
+const f = (payload: any) =>(n: number) => {}
+
+const C = () => {
+    const a = 5
+    return () => (
+        <div>
+            {users.map(u => {
+                const onCLick = f(u.id)(a)
+                return (
+                    <div onClick={onCLick}>
+
+                    </div>
+                )
+            })}
+        </div>
+    )
+}*/
