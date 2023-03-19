@@ -9,7 +9,7 @@ import {
     UserType
 } from "../../redux/usersReducer";
 import {AppRootStateType} from "../../redux/reduxStore";
-import { Dispatch} from "redux";
+
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
