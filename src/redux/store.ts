@@ -21,6 +21,15 @@ export type MessageType = {
 export type MyProfilePageType = {
     myPosts: Array<MyPostType>
     newPostText: string
+    profile:ProfileType
+}
+
+export type ProfileType={
+        photos:{
+            small: string| undefined
+            large: string| undefined
+        }
+
 }
 
 export type dialogsPageType = {
@@ -38,6 +47,13 @@ export type RootStateType = {
 export type ActionType = {
     type: string;
     text: string;
+    profile?: ProfileType
+}
+
+export type ProfileActionType={
+    type: string;
+    text: string;
+    profile: ProfileType
 }
 
 export type UsersActionType = {
@@ -57,6 +73,7 @@ export type StoreType={
     dispatch:(action:ActionType)=>void
 }
 
+/*
 export let store = {
     _state: {
         myProfilePage: {
@@ -95,4 +112,4 @@ export let store = {
         this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
         this._callSubscriber(this._state)
     }
-}
+}*/
