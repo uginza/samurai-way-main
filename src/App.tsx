@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
-import {Profile} from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Feed} from "./components/Feed/Feed";
@@ -30,7 +29,7 @@ function App(/*props:AppPropsType*/) {
                 <Header/>
                 <NavBar/>
                 <div className="appWrapperContnent">
-                    <Route path="/profile" render={() => <ProfileContainer/>}/>
+                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/feed" render={() => <Feed/>}/>
