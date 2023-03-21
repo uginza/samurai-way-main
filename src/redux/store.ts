@@ -65,6 +65,17 @@ export type UsersActionType = {
     isFetching:boolean
 }
 
+export type authReducerActionType={
+    type:string,
+    data:AuthReducerType
+    isFetching:boolean
+}
+export type AuthReducerType={
+    userId: number,
+    email: string,
+    login: string,
+}
+
 export type StoreType={
     _state:RootStateType
     _callSubscriber:(state:RootStateType)=>void
